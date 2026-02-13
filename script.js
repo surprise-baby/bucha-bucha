@@ -27,6 +27,8 @@ const pages = {
     2: document.getElementById('page-2'),
     3: document.getElementById('page-3'),
     4: document.getElementById('page-4'),
+
+    gallery: document.getElementById('page-gallery'),
     5: document.getElementById('page-5')
 };
 
@@ -239,35 +241,50 @@ function setupButtons() {
         transitionToPage(2);
     });
 
-    // Page 4 -> 5
+    // Page 4 -> Gallery
+    document.getElementById('gallery-start-btn').addEventListener('click', () => {
+        transitionToPage('gallery');
+        showSlides(1); // Check and reset slideshow
+    });
+
+    // Gallery -> Page 5
     document.getElementById('quiz-start-btn').addEventListener('click', () => {
         transitionToPage(5);
         startQuiz();
     });
+
+    // Gallery Logic
+    setupGallery();
 }
 
 // --- PAGE 5: QUIZ ---
 const QUIZ_DATA = [
     {
-        q: "When did we first talk until 3AM like sleep is fake?? 💖",
-        options: ["Last Week", "The Simulation", "Day 1", "Never"],
-        correct: 2 // Index
+        q: "Which is the best thing at the end of the day ?",
+        options: ["Bro tujhe pata hai aaj kya hua - wala walk", "Huggieeeee", "1000 kissie", "Par tum meri baat suno naaaa"],
+        correct: [1, 3] // Array of correct indices
     },
     {
-        q: "What is our dumbest inside joke?",
-        options: ["The Potato", "BuchaBucha", "Aliens", "Coding"],
-        correct: 1
+        q: "What is our cutest inside reference?",
+        options: ["mera petu me thoda dard ho raha hai", "Bucha-Bucha", "heart-attack", "1832901372849072340"],
+        correct: [0, 1, 2] // Multiple correct!
     },
     {
         q: "Who fell harder? 👀",
         options: ["You", "Me", "Rachit (Obv)", "Both equal (lie)"],
-        correct: 2
+        correct: [0, 1, 2, 3] // Multiple correct
     },
     {
-        q: "I would choose you in every universe.",
-        options: ["Yes", "YES", "YESSS", "FOREVER"],
-        correct: -1 // All correct
+        q: "Final verdict… which is the cutest one?",
+        options: [
+            "You normally",
+            "Me when I'm a baby",
+            "We both together",
+            "You sleeping"
+        ],
+        correct: [0, 1, 2, 3]
     }
+
 ];
 
 let quizIndex = 0;
@@ -283,6 +300,9 @@ function loadQuestion(index) {
             <h1 class="bounce-text">HAPPY VALENTINE’S DAY Babuuuu 💕</h1>
             <p>I love you more than you love cheesecakes <3 </p>
             <p style="font-family:'Great Vibes'; font-size: 2rem; margin-top: 20px;">— Rachit</p>
+            <p > </p>
+            <p style="margin-top: 20px; font-weight: bold; color: #ff0066;">Ab mujhe bhi puch lo na KI will i be your velantine? 🥺👉👈</p>
+            
         `;
         fireworks();
         return;
@@ -298,7 +318,7 @@ function loadQuestion(index) {
         btn.innerText = opt;
         btn.className = 'quiz-btn';
         btn.onclick = () => {
-            if (data.correct === -1 || i === data.correct) {
+            if (data.correct.includes(i)) {
                 confetti({
                     particleCount: 30,
                     spread: 50,
@@ -417,5 +437,61 @@ function setupExtras() {
             trail.style.opacity = '0';
             setTimeout(() => trail.remove(), 500);
         }, 100);
+    });
+}
+
+// --- GALLERY LOGIC ---
+let slideIndex = 1;
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+
+function setupGallery() {
+    const images = document.querySelectorAll('.fav-img');
+
+    images.forEach(img => {
+        img.addEventListener('click', () => {
+            // Remove previous selection
+            images.forEach(i => i.classList.remove('selected'));
+            // Add to current
+            img.classList.add('selected');
+
+            // Celebration
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+
+            // Auto transition after a short delay
+            setTimeout(() => {
+                transitionToPage(5);
+                startQuiz();
+            }, 1000);
+        });
     });
 }

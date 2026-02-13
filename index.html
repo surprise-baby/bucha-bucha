@@ -33,7 +33,7 @@
     <!-- PAGE 1: PASSWORD GATE -->
     <section id="page-1" class="page active">
         <div class="glass-container shake-wrapper" id="login-card">
-            <h1 class="bounce-text">WHO ARE YOU? 👀💖</h1>
+            <h1 class="bounce-text">WHO THISSS? 👀💖</h1>
 
             <!-- Step 1 -->
             <div id="pass-step-1">
@@ -51,7 +51,7 @@
             <div id="pass-step-2" class="hidden">
                 <h1 class="fade-in">Hiii Babyyyyy !!!</h1>
                 <p class="hint-text">HOW CAN I BE SURE??? �</p>
-                <p class="sub-hint">(Hint: b____b____)</p>
+                <p class="sub-hint">(Hint: one of our first cute words (that you made ofc)  )</p>
 
                 <input type="text" id="final-pass" class="full-input" placeholder="..........">
                 <button id="unlock-btn" class="action-btn">UNLOCK �</button>
@@ -95,15 +95,66 @@
     <section id="page-4" class="page hidden">
         <div class="content-wrapper">
             <h1 class="chaotic-bounce">YAYYYYYYYYYYYYY 💖💖💖💖</h1>
-            <h2 class="pulse-text">YOU’RE STUCK WITH ME NOW 😌</h2>
+            <h2 class="pulse-text">STUCK WITH ME NOW 😌</h2>
 
             <div class="gif-grid">
                 <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" class="grid-gif">
                 <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="grid-gif">
             </div>
 
-            <button id="quiz-start-btn" class="action-btn">Continue the chaos →</button>
+            <button id="gallery-start-btn" class="action-btn">See our memories →</button>
         </div>
+    </section>
+
+    <!-- PAGE 4.5: GALLERY / SLIDESHOW -->
+    <section id="page-gallery" class="page hidden">
+        <div class="glass-container gallery-container">
+            <h2 class="bounce-text">OUR CUTESTTTT MOMENTS </h2>
+
+            <!-- Slideshow -->
+            <div class="slideshow-container">
+                <!-- Slide 1 -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="pics/pic1.jpeg" class="slide-img">
+                    <div class="text">Remember this? 🥰</div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="pics/pic2.jpeg" class="slide-img">
+                    <div class="text"> </div>
+                </div>
+
+                <!-- Slide 3: SELECTION -->
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <h3 style="margin-bottom:15px; color:#ff0066;">Chalo choose favourite ab from this? </h3>
+                    <div class="fav-grid" id="fav-grid">
+                        <img src="pics/pic3.jpeg" class="fav-img" data-id="1">
+                        <img src="pics/pic4.jpeg" class="fav-img" data-id="2">
+                        <img src="pics/pic5.jpeg" class="fav-img" data-id="3">
+                        <img src="pics/pic6.jpeg" class="fav-img" data-id="4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next/Prev buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+
+        <!-- Dots -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+        <button id="quiz-start-btn" class="action-btn hidden" style="margin-top: 20px;">Ready for the Quiz?
+            →</button>
     </section>
 
     <!-- PAGE 5: MEMORY QUIZ -->
