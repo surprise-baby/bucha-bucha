@@ -244,7 +244,11 @@ function setupButtons() {
     // Page 4 -> Gallery
     document.getElementById('gallery-start-btn').addEventListener('click', () => {
         transitionToPage('gallery');
-        showSlides(1); // Check and reset slideshow
+        // Delay showSlides to ensure page is visible first
+        setTimeout(() => {
+            slideIndex = 1;
+            showSlides(slideIndex);
+        }, 300);
     });
 
     // Gallery -> Page 5
@@ -455,6 +459,12 @@ function showSlides(n) {
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
 
+    // Safety check - if no slides found, exit gracefully
+    if (!slides || slides.length === 0) {
+        console.warn("No slides found");
+        return;
+    }
+
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
 
@@ -466,8 +476,12 @@ function showSlides(n) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
 
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
+    if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].style.display = "block";
+    }
+    if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+    }
 }
 
 function setupGallery() {
