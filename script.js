@@ -208,6 +208,14 @@ function setupButtons() {
     }
 
     document.getElementById('yes-btn').addEventListener('click', () => {
+        const audio = document.getElementById('bg-music');
+        if (audio) {
+            audio.play().catch(e => console.log("Audio play failed:", e));
+            // Update state and UI to match
+            audioPlaying = true;
+            const btn = document.getElementById('music-toggle');
+            if (btn) btn.innerText = "⏸ Pause Music";
+        }
         transitionToPage(4);
     });
 
