@@ -134,23 +134,23 @@ function setupButtons() {
         const currentY = rect.top;
 
         // Calculate a new random position (but bounce in a direction away from cursor)
-        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-        
-        // Random target position
-        let targetX = Math.random() * maxX;
-        let targetY = Math.random() * maxY;
+        const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - 100);
+        const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - 100);
+
+        // Random target position with padding
+        let targetX = Math.random() * maxX + 50;
+        let targetY = Math.random() * maxY + 50;
 
         // Ensure minimum distance from current position
         const minDistance = 150;
         while (Math.abs(targetX - currentX) < minDistance && Math.abs(targetY - currentY) < minDistance) {
-            targetX = Math.random() * maxX;
-            targetY = Math.random() * maxY;
+            targetX = Math.random() * maxX + 50;
+            targetY = Math.random() * maxY + 50;
         }
 
         // Set position to fixed for full screen movement
         noBtn.style.position = 'fixed';
-        
+
         // Bounce animation sequence
         const bounceKeyframes = [
             { transform: 'scale(1) rotate(0deg)', offset: 0 },
@@ -184,7 +184,7 @@ function setupButtons() {
                     duration: 200,
                     easing: 'ease-out'
                 });
-                
+
                 // Reset transition and allow next animation
                 setTimeout(() => {
                     noBtn.style.transition = '';
@@ -272,8 +272,8 @@ function loadQuestion(index) {
     if (index >= QUIZ_DATA.length) {
         // End of quiz
         document.querySelector('.quiz-container').innerHTML = `
-            <h1 class="bounce-text">HAPPY VALENTINE’S DAY RIMU 💕</h1>
-            <p>I love you more than code bugs.</p>
+            <h1 class="bounce-text">HAPPY VALENTINE’S DAY Babuuuu 💕</h1>
+            <p>I love you more than you love cheesecakes <3 </p>
             <p style="font-family:'Great Vibes'; font-size: 2rem; margin-top: 20px;">— Rachit</p>
         `;
         fireworks();
@@ -334,11 +334,11 @@ function transitionToPage(pageNum) {
     setTimeout(() => {
         const target = pages[pageNum];
         target.classList.remove('hidden');
-        
+
         // Add active class after another brief delay for smooth animation
         setTimeout(() => {
             target.classList.add('active');
-            
+
             // Page 2 Specific Logic: Delayed Reveal of buttons
             if (pageNum === 2) {
                 const btns = document.getElementById('intro-buttons');
@@ -386,7 +386,7 @@ function setupExtras() {
             audio.currentTime = 0; // Start from beginning
             audio.play().catch(e => console.log("Audio play failed (needs interaction):", e));
             btn.innerText = "⏸ Pause Music";
-            
+
             // Auto-stop after 30 seconds
             musicTimeout = setTimeout(() => {
                 audio.pause();
