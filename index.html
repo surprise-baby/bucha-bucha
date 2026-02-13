@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Rimu 💖</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-hearts-bg" id="bg-hearts"></div>
+
+
+    <!-- Music Toggle -->
+    <button id="music-toggle" class="music-btn">🎵 Play Music</button>
+    <audio id="bg-music">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        <!-- Make U Mine - PUBLIC (will be replaced with actual file) -->
+    </audio>
+
+    <!-- PAGE 1: PASSWORD GATE -->
+    <section id="page-1" class="page active">
+        <div class="glass-container shake-wrapper" id="login-card">
+            <h1 class="bounce-text">WHO ARE YOU? 👀💖✨</h1>
+
+            <!-- Step 1 -->
+            <div id="pass-step-1">
+                <p class="hint-text">Password (4 letters)</p>
+                <div class="input-group">
+                    <input type="text" maxlength="1" class="char-input" data-index="0">
+                    <input type="text" maxlength="1" class="char-input" data-index="1">
+                    <input type="text" maxlength="1" class="char-input" data-index="2">
+                    <input type="text" maxlength="1" class="char-input" data-index="3">
+                </div>
+                <p id="error-msg-1" class="error-text hidden">WRONGGGGG 😤 TRY AGAIN CUTIE</p>
+            </div>
+
+            <!-- Step 2 (Hidden initially) -->
+            <div id="pass-step-2" class="hidden">
+                <h2 class="fade-in">OH???? 👀</h2>
+                <p class="hint-text">HOW CAN I BE SURE??? 😏</p>
+                <p class="sub-hint">(Hint: typical bubbly noise... 5 + 5 letters 👀💋)</p>
+
+                <input type="text" id="final-pass" class="full-input" placeholder="..........">
+                <button id="unlock-btn" class="action-btn">UNLOCK 🔓</button>
+                <p id="error-msg-2" class="error-text hidden">NAUR 💅</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 2: THE MAIN QUESTION -->
+    <section id="page-2" class="page hidden">
+        <div class="content-wrapper">
+            <h1 class="typing-text">WILL YOU BE MY VALENTINE????? 💘💘💘</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGIwZHIxN3Z0aHl5MWV4OWo5b3V6Z3Z5amh6eWdybzZ5bzF6eHh6dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/26BRv0ThflsHCqDrG/giphy.gif"
+                    alt="Cute Heart Cat" class="cute-gif">
+            </div>
+
+            <div id="intro-buttons" class="buttons-container hidden">
+                <button id="yes-btn" class="big-btn">YES 💖</button>
+                <button id="no-btn" class="small-btn">NO 😒</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: SAD LOOP -->
+    <section id="page-3" class="page hidden">
+        <div class="content-wrapper">
+            <h1 id="sad-title">ARE YOU SURE???? 🥺</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/OPU6wzx8J92E2dxrT2/giphy.gif" alt="Sad crying" class="cute-gif">
+            </div>
+
+            <div class="buttons-container">
+                <button id="sad-yes-btn" class="big-btn">Yes 😢</button>
+                <button id="sad-no-btn" class="big-btn">NO! I changed my mind! 💖</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 4: CELEBRATION -->
+    <section id="page-4" class="page hidden">
+        <div class="content-wrapper">
+            <h1 class="chaotic-bounce">YAYYYYYYYYYYYYY 💖💖💖💖</h1>
+            <h2 class="pulse-text">YOU’RE STUCK WITH ME NOW 😌</h2>
+
+            <div class="gif-grid">
+                <img src="https://media.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" class="grid-gif">
+                <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="grid-gif">
+            </div>
+
+            <button id="quiz-start-btn" class="action-btn">Continue the chaos →</button>
+        </div>
+    </section>
+
+    <!-- PAGE 5: MEMORY QUIZ -->
+    <section id="page-5" class="page hidden">
+        <div class="glass-container quiz-container">
+            <h2 id="quiz-question" class="quiz-text">Question goes here...</h2>
+
+            <div id="quiz-options" class="options-grid">
+                <!-- Dynamically populated -->
+            </div>
+
+            <p id="quiz-feedback" class="feedback-text hidden"></p>
+        </div>
+    </section>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
