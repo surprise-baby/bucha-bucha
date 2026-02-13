@@ -5,7 +5,7 @@ const PASSWORDS = {
 };
 
 const SAD_MESSAGES = [
-    "ARE YOU SURE???? 🥺",
+    "ARE YOU SURE???? 💔",
     "Are you really sure?",
     "Really really sure?",
     "REALLY REALLY REALLY SURE???",
@@ -14,7 +14,7 @@ const SAD_MESSAGES = [
     "This is emotional damage.",
     "Final warning.",
     "Are you 100000% sure?",
-    "I’m uninstalling."
+    "I'm uninstalling."
 ];
 
 // --- STATE ---
@@ -112,6 +112,8 @@ function setupInputs() {
 function setupButtons() {
     const noBtn = document.getElementById('no-btn');
     const contentWrapper = document.querySelector('#page-2 .content-wrapper');
+    let bounceCount = 0;
+    let isAnimating = false;
 
     // Running No Button
     noBtn.addEventListener('mouseover', moveNoButton);
@@ -122,11 +124,87 @@ function setupButtons() {
     });
 
     function moveNoButton() {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
-        noBtn.style.position = 'fixed'; // Change to fixed to allow full screen roam
-        noBtn.style.left = `${x}px`;
-        noBtn.style.top = `${y}px`;
+        if (isAnimating) return; // Prevent spam during animation
+        isAnimating = true;
+        bounceCount++;
+
+        // Get current position
+        const rect = noBtn.getBoundingClientRect();
+        const currentX = rect.left;
+        const currentY = rect.top;
+
+        // Calculate a new random position (but bounce in a direction away from cursor)
+        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+        
+        // Random target position
+        let targetX = Math.random() * maxX;
+        let targetY = Math.random() * maxY;
+
+        // Ensure minimum distance from current position
+        const minDistance = 150;
+        while (Math.abs(targetX - currentX) < minDistance && Math.abs(targetY - currentY) < minDistance) {
+            targetX = Math.random() * maxX;
+            targetY = Math.random() * maxY;
+        }
+
+        // Set position to fixed for full screen movement
+        noBtn.style.position = 'fixed';
+        
+        // Bounce animation sequence
+        const bounceKeyframes = [
+            { transform: 'scale(1) rotate(0deg)', offset: 0 },
+            { transform: 'scale(1.3) rotate(-10deg)', offset: 0.15 },
+            { transform: 'scale(0.9) rotate(10deg)', offset: 0.3 },
+            { transform: 'scale(1.1) rotate(-5deg)', offset: 0.5 },
+            { transform: 'scale(1) rotate(0deg)', offset: 1 }
+        ];
+
+        // Shake/bounce effect before moving
+        noBtn.animate(bounceKeyframes, {
+            duration: 300,
+            easing: 'ease-out'
+        });
+
+        // After a small delay, move to new position with a smooth arc
+        setTimeout(() => {
+            // Add transition for smooth movement
+            noBtn.style.transition = 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            noBtn.style.left = `${targetX}px`;
+            noBtn.style.top = `${targetY}px`;
+
+            // Landing bounce effect
+            setTimeout(() => {
+                noBtn.animate([
+                    { transform: 'scale(1.2)' },
+                    { transform: 'scale(0.9)' },
+                    { transform: 'scale(1.05)' },
+                    { transform: 'scale(1)' }
+                ], {
+                    duration: 200,
+                    easing: 'ease-out'
+                });
+                
+                // Reset transition and allow next animation
+                setTimeout(() => {
+                    noBtn.style.transition = '';
+                    isAnimating = false;
+                }, 200);
+            }, 400);
+        }, 150);
+
+        // Fun text changes after multiple bounces
+        if (bounceCount === 3) {
+            noBtn.innerText = "Nope �";
+        } else if (bounceCount === 5) {
+            noBtn.innerText = "Can't catch me!";
+        } else if (bounceCount === 8) {
+            noBtn.innerText = "Stop trying!";
+        } else if (bounceCount === 12) {
+            noBtn.innerText = "Just click YES 💖";
+        } else if (bounceCount >= 15) {
+            noBtn.innerText = "ZOOM �";
+        }
     }
 
     document.getElementById('yes-btn').addEventListener('click', () => {
@@ -163,7 +241,7 @@ function setupButtons() {
 // --- PAGE 5: QUIZ ---
 const QUIZ_DATA = [
     {
-        q: "When did we first talk until 3AM like sleep is fake?? 🌙",
+        q: "When did we first talk until 3AM like sleep is fake?? 💖",
         options: ["Last Week", "The Simulation", "Day 1", "Never"],
         correct: 2 // Index
     },
@@ -294,14 +372,27 @@ function setupExtras() {
     // Music Toggle
     const audio = document.getElementById('bg-music');
     const btn = document.getElementById('music-toggle');
+    let musicTimeout = null;
 
     btn.addEventListener('click', () => {
         if (audioPlaying) {
             audio.pause();
             btn.innerText = "🎵 Play Music";
+            if (musicTimeout) {
+                clearTimeout(musicTimeout);
+                musicTimeout = null;
+            }
         } else {
+            audio.currentTime = 0; // Start from beginning
             audio.play().catch(e => console.log("Audio play failed (needs interaction):", e));
             btn.innerText = "⏸ Pause Music";
+            
+            // Auto-stop after 30 seconds
+            musicTimeout = setTimeout(() => {
+                audio.pause();
+                btn.innerText = "🎵 Play Music";
+                audioPlaying = false;
+            }, 30000);
         }
         audioPlaying = !audioPlaying;
     });

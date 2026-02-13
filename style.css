@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     background: var(--bg-pink);
     overflow-x: hidden;
     height: 100vh;
@@ -154,7 +154,7 @@ body {
 
 .bounce-text {
     animation: bounce 2s infinite;
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Pacifico', cursive;
     font-size: 2.5rem;
     color: #ff0066;
     text-shadow: 2px 2px 0px #fff;
@@ -221,7 +221,8 @@ body {
 button {
     cursor: pointer;
     border: none;
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
     transition: all 0.3s;
 }
 
@@ -263,6 +264,13 @@ button {
     border-radius: 10px;
     position: absolute;
     /* Crucial for moving */
+}
+
+#no-btn {
+    cursor: pointer;
+    z-index: 1000;
+    white-space: nowrap;
+    will-change: transform, left, top;
 }
 
 .music-btn {
