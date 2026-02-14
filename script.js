@@ -270,7 +270,7 @@ const QUIZ_DATA = [
     },
     {
         q: "What is our cutest inside reference?",
-        options: ["mera petu me thoda dard ho raha hai", "Bucha-Bucha", "heart-attack", "1832901372849072340"],
+        options: ["mera petu me thoda dard ho raha hai", "Bucha-Bucha", "heart-attack", "1832901372849072340+1179"],
         correct: [0, 1, 2] // Multiple correct!
     },
     {
